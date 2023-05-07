@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dietolog_server.spring.jpa.postgresql.model.Nutrients;
 import com.dietolog_server.spring.jpa.postgresql.model.Products;
 import com.dietolog_server.spring.jpa.postgresql.repository.ProductsRepository;
+import com.dietolog_server.spring.jpa.postgresql.repository.NutrientsRepository;
 
 @CrossOrigin //(origins = "http://localhost:8081")
 @RestController
@@ -28,6 +30,10 @@ public class ProductsController {
 
 	@Autowired
 	ProductsRepository productsRepository;
+
+	
+	@Autowired
+	NutrientsRepository nutrientsRepository;
 
 	@GetMapping("/products")
 	public ResponseEntity<List<Products>> getAllProducts(@RequestParam(required = false) String title) {
@@ -52,6 +58,29 @@ public class ProductsController {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+
+	
+	@GetMapping("/nutrients")
+	public ResponseEntity<List<Nutrients>> getAllNutriets(@RequestParam(required = false) String title) {
+		try {
+			List<Nutrients> nutrients = new ArrayList<Nutrients>();
+
+			nutrientsRepository.findNutrientsByQuery().forEach(nutrients::add);
+
+			
+			if (nutrients.isEmpty()) {
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			}
+
+			nutrientsRepository.findByNameContaining(title).forEach(nutrients::add);
+			return new ResponseEntity<>(nutrients, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+
+	//--------------------------------------------------------------------
 
 	@GetMapping("/tutorials/{id}")
 	public ResponseEntity<Products> getProductById(@PathVariable("id") long id) {

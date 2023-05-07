@@ -12,6 +12,6 @@ public interface ProductsRepository extends JpaRepository<Products, Long> {
 
   List<Products> findByNameContaining(String name);
   
-  @Query(value = "select _id, name, lowercase from products limit 10", nativeQuery = true)
+  @Query(value = "select _id, name, lowercase from products limit 1000000", nativeQuery = true)
   List<Products> findProductsByQuery();
 }
