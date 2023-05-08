@@ -36,7 +36,7 @@ public class ProductsController {
 	NutrientsRepository nutrientsRepository;
 
 	@GetMapping("/products")
-	public ResponseEntity<List<Products>> getAllProducts(@RequestParam(required = false) String title) {
+	public ResponseEntity<List<Products>> getAllProducts(@RequestParam(required = false) String filter) {
 		try {
 			List<Products> products = new ArrayList<Products>();
             /* dont del!!
@@ -45,7 +45,7 @@ public class ProductsController {
 			else
 			    productsRepository.findByNameContaining(title).forEach(products::add);
             */
-			productsRepository.findProductsByQuery().forEach(products::add);
+			productsRepository.findProductsByQuery(filter).forEach(products::add);
 
 			
 			if (products.isEmpty()) {
@@ -54,6 +54,16 @@ public class ProductsController {
 
 			//    productsRepository.findByNameContaining(title).forEach(products::add);
 			return new ResponseEntity<>(products, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	
+	@GetMapping("/product_hint")
+	public ResponseEntity<String> getProductHint(@RequestParam(required = false) Integer productId) {
+		try {
+			return new ResponseEntity<>(productsRepository.getProductHint(productId), HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
