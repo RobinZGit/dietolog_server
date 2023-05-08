@@ -16,14 +16,20 @@ public class Products {
 	@Column(name = "lowercase")
 	private String lowercase;
 
+	private Double val;
+
+	private String hint;
+
 
 	public Products() {
 
 	}
 
-	public Products(String name, String lowercase) {
+	public Products(String name, String lowercase, Double val,  String hint) {
 		this.name = name;
 		this.lowercase = lowercase;
+		this.val = val;
+		this.hint = hint;
 	}
 
 	public long getId() {
@@ -44,6 +50,22 @@ public class Products {
 
 	public void setLowercase(String lowercase) {
 		this.lowercase = lowercase;
+	}
+
+	public Double getVal() {
+		return val;
+	}
+
+	public void setVal(Double val) {
+		this.val = val;
+	}
+
+	public String getHint() {
+		return hint;
+	}
+
+	public void setHint(String hint) {
+		this.hint = hint;
 	}
 
 

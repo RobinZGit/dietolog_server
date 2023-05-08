@@ -18,14 +18,20 @@ public class Nutrients {
     @Column(name = "dailyrate")
 	private String dailyrate;
 
+	private Double val;
+
+	private String hint;
+
     public Nutrients() {
 
 	}
 
-	public Nutrients(String name, String units, String dailyrate) {
+	public Nutrients(String name, String units, String dailyrate, Double val,  String hint) {
 		this.name = name;
 		this.units = units;
         this.dailyrate = dailyrate;
+		this.val = val;
+		this.hint = hint;
 	}
 
 	public long getId() {
@@ -48,8 +54,28 @@ public class Nutrients {
 		this.units = units;
 	}
 
-    public void setDailyrates(String dailyrate) {
+    public void setDailyrate(String dailyrate) {
 		this.dailyrate = dailyrate;
+	}
+
+	public String getDailyrate(String dailyrate) {
+		return dailyrate;
+	}
+
+	public Double getVal() {
+		return val;
+	}
+
+	public void setVal(Double val) {
+		this.val = val;
+	}
+
+	public String getHint() {
+		return hint;
+	}
+
+	public void setHint(String hint) {
+		this.hint = hint;
 	}
 
 

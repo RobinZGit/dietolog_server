@@ -52,7 +52,7 @@ public class ProductsController {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}
 
-			    productsRepository.findByNameContaining(title).forEach(products::add);
+			//    productsRepository.findByNameContaining(title).forEach(products::add);
 			return new ResponseEntity<>(products, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -72,7 +72,7 @@ public class ProductsController {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}
 
-			nutrientsRepository.findByNameContaining(title).forEach(nutrients::add);
+			//nutrientsRepository.findByNameContaining(title).forEach(nutrients::add);
 			return new ResponseEntity<>(nutrients, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -93,6 +93,7 @@ public class ProductsController {
 		}
 	}
 
+	/*
 	@PostMapping("/products")
 	public ResponseEntity<Products> createTutorial(@RequestBody Products product) {
 		try {
@@ -103,7 +104,7 @@ public class ProductsController {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-
+*/
 	@PutMapping("/tutorials/{id}")
 	public ResponseEntity<Products> updateTutorial(@PathVariable("id") long id, @RequestBody Products product) {
 		Optional<Products> productData = productsRepository.findById(id);

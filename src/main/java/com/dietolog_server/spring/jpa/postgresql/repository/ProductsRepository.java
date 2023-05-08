@@ -11,7 +11,9 @@ public interface ProductsRepository extends JpaRepository<Products, Long> {
   //List<Products> findByName(String name);
 
   List<Products> findByNameContaining(String name);
-  
-  @Query(value = "select _id, name, lowercase from products limit 1000000", nativeQuery = true)
+  @Query(value = "select _id, name, lowercase, 0 val  \n"+ 
+                 //хинт тормозит..
+                 ",(select string_agg(name||' - '||cast(perc1on100gr as text)||'%???',chr(13)||chr(13))  from (select n.name,i.perc1on100gr from info i left join nutrients n on n._id=i.nutrient where i.product=p._id order by i.perc1on100gr desc limit 10) ZZ) hint \n"+
+                 " from products p", nativeQuery = true)
   List<Products> findProductsByQuery();
 }
