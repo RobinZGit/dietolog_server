@@ -20,16 +20,19 @@ public class Products {
 
 	private String hint;
 
+	private Integer rownumber;
+
 
 	public Products() {
 
 	}
 
-	public Products(String name, String lowercase, Double val,  String hint) {
+	public Products(String name, String lowercase, Double val,  String hint, Integer rownumber) {
 		this.name = name;
 		this.lowercase = lowercase;
 		this.val = val;
 		this.hint = hint;
+		this.rownumber = rownumber;
 	}
 
 	public long getId() {
@@ -66,6 +69,14 @@ public class Products {
 
 	public void setHint(String hint) {
 		this.hint = hint;
+	}
+
+	public Integer getRownumber() {
+		return rownumber;
+	}
+
+	public void setRownumber(Integer rownumber) {
+		this.rownumber = rownumber;
 	}
 
 

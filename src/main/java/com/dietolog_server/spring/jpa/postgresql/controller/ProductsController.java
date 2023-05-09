@@ -36,7 +36,7 @@ public class ProductsController {
 	NutrientsRepository nutrientsRepository;
 
 	@GetMapping("/products")
-	public ResponseEntity<List<Products>> getAllProducts(@RequestParam(required = false) String filter) {
+	public ResponseEntity<List<Products>> getAllProducts(@RequestParam(required = false) String filter, @RequestParam(required = false) Integer sorting ) {
 		try {
 			List<Products> products = new ArrayList<Products>();
             /* dont del!!
@@ -45,7 +45,7 @@ public class ProductsController {
 			else
 			    productsRepository.findByNameContaining(title).forEach(products::add);
             */
-			productsRepository.findProductsByQuery(filter).forEach(products::add);
+			productsRepository.findProductsByQuery(filter,sorting).forEach(products::add);
 
 			
 			if (products.isEmpty()) {
@@ -60,7 +60,7 @@ public class ProductsController {
 	}
 
 	
-	@GetMapping("/product_hint")
+	@GetMapping("/product_hint")  //TODO..
 	public ResponseEntity<String> getProductHint(@RequestParam(required = false) Integer productId) {
 		try {
 			return new ResponseEntity<>(productsRepository.getProductHint(productId), HttpStatus.OK);
@@ -73,7 +73,7 @@ public class ProductsController {
 	@GetMapping("/nutrients")
 	public ResponseEntity<List<Nutrients>> getAllNutriets(@RequestParam(required = false) String title) {
 		try {
-			List<Nutrients> nutrients = new ArrayList<Nutrients>();
+			List<Nutrients> nutrients = new ArrayList<>();
 
 			nutrientsRepository.findNutrientsByQuery().forEach(nutrients::add);
 
