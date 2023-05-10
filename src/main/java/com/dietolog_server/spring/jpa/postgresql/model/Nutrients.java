@@ -1,6 +1,9 @@
 package com.dietolog_server.spring.jpa.postgresql.model;
-import javax.persistence.*;
 
+import javax.persistence.*;
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name = "nutrients")
 public class Nutrients {
@@ -22,66 +25,9 @@ public class Nutrients {
 
 	private String hint;
 
-    public Nutrients() {
-
-	}
-
-	public Nutrients(String name, String units, String dailyrate, Double val,  String hint) {
-		this.name = name;
-		this.units = units;
-        this.dailyrate = dailyrate;
-		this.val = val;
-		this.hint = hint;
-	}
-
+    //TODO   если удалить этот геттер - падает при сортировке Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'java.lang.Integer'; nested exception is java.lang.NumberFormatException: For input string: "undefined"]
 	public long getId() {
 		return _id;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getUnits() {
-		return units;
-	}
-
-	public void setUnits(String units) {
-		this.units = units;
-	}
-
-    public void setDailyrate(String dailyrate) {
-		this.dailyrate = dailyrate;
-	}
-
-	public String getDailyrate(String dailyrate) {
-		return dailyrate;
-	}
-
-	public Double getVal() {
-		return val;
-	}
-
-	public void setVal(Double val) {
-		this.val = val;
-	}
-
-	public String getHint() {
-		return hint;
-	}
-
-	public void setHint(String hint) {
-		this.hint = hint;
-	}
-
-
-	@Override
-	public String toString() {
-		return "Product [id=" + _id + ", name=" + name + ", units=" + units + ", dailyrate=" + dailyrate  + "]";
-	}
-    
 }
