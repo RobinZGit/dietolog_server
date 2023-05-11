@@ -11,7 +11,12 @@ import com.dietolog_server.spring.jpa.postgresql.model.Info;
 public interface InfoRepository  extends JpaRepository<Info, Long>{
 
   
+  /* 
   @Query(value = "select _id, product, nutrient, cast(value as text) value, cast(perc1on100gr as text) perc1on100gr  \n" +
                  " from info i  where i.product = :productId", nativeQuery = true)
   List<Info> findInfoByProductId(@Param(value = "productId") Integer productId);
+  */
+  @Query(value = "select _id, product, nutrient, cast(value as text) value, cast(perc1on100gr as text) perc1on100gr  \n" +
+  " from info i  where position(','||i.product||',' in :productList) > 0", nativeQuery = true)
+  List<Info> findInfoByProductList(@Param(value = "productList") String productList);
 }

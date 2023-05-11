@@ -97,11 +97,11 @@ public class ProductsController {
 
 	//findInfoByProductId
 	@GetMapping("/info")
-	public ResponseEntity<List<Info>> getInfoByProductId(@RequestParam(required = false) Integer productId) {
+	public ResponseEntity<List<Info>> getInfoByProductId(@RequestParam(required = false) String productList) {
 		try {
 			List<Info> info = new ArrayList<>();
 
-			infoRepository.findInfoByProductId(productId).forEach(info::add);
+			infoRepository.findInfoByProductList(productList).forEach(info::add);
 
 			
 			if (info.isEmpty()) {
