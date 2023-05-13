@@ -19,4 +19,15 @@ public interface InfoRepository  extends JpaRepository<Info, Long>{
   @Query(value = "select _id, product, nutrient, cast(value as text) value, cast(perc1on100gr as text) perc1on100gr  \n" +
   " from info i  where position(','||i.product||',' in :productList) > 0", nativeQuery = true)
   List<Info> findInfoByProductList(@Param(value = "productList") String productList);
+
+
+  @Query(value = 
+  "select _id, product, nutrient, value, perc1on100gr , rn from (  \n" +
+  "    select _id, product, nutrient, cast(value as text) value, cast(perc1on100gr as text) perc1on100gr  \n" +
+  "         , row_number() OVER (PARTITION BY i.nutrient ORDER BY i.perc1on100gr DESC ) rn  \n" +
+  "    from info i  where position(','||i.nutrient||',' in :nutrientList) > 0  \n" +
+  ") ZZ where rn<=:topCountRecommendedProducts  \n"
+  
+  , nativeQuery = true)
+  List<Info> findRecommendedProducts(@Param(value = "nutrientList") String nutrientList, @Param(value = "topCountRecommendedProducts") Integer topCountRecommendedProducts);
 }

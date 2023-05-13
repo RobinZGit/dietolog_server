@@ -23,4 +23,6 @@ public class Products {
 	private String hint;
     
 	private Integer rownumber;
+
+	private Integer isrecommended;
 }

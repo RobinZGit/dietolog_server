@@ -108,7 +108,24 @@ public class ProductsController {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}
 
-			//nutrientsRepository.findByNameContaining(title).forEach(nutrients::add);
+			return new ResponseEntity<>(info, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@GetMapping("/recommended_products")
+	public ResponseEntity<List<Info>> findRecommendedProducts(@RequestParam(required = false) String nutrientList, @RequestParam(required = false) Integer topCountRecommendedProducts) {
+		try {
+			List<Info> info = new ArrayList<>();
+
+			infoRepository.findRecommendedProducts(nutrientList, topCountRecommendedProducts).forEach(info::add);
+
+			
+			if (info.isEmpty()) {
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			}
+
 			return new ResponseEntity<>(info, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
