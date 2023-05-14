@@ -115,11 +115,13 @@ public class ProductsController {
 	}
 
 	@GetMapping("/recommended_products")
-	public ResponseEntity<List<Info>> findRecommendedProducts(@RequestParam(required = false) String nutrientList, @RequestParam(required = false) Integer topCountRecommendedProducts) {
+	public ResponseEntity<List<Info>> findRecommendedProducts(@RequestParam(required = false) String nutrientList, 
+	                                                          @RequestParam(required = false) String excludedProductstList, 
+															  @RequestParam(required = false) Integer topCountRecommendedProducts) {
 		try {
 			List<Info> info = new ArrayList<>();
 
-			infoRepository.findRecommendedProducts(nutrientList, topCountRecommendedProducts).forEach(info::add);
+			infoRepository.findRecommendedProducts(nutrientList, excludedProductstList, topCountRecommendedProducts).forEach(info::add);
 
 			
 			if (info.isEmpty()) {

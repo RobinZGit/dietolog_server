@@ -25,4 +25,6 @@ public class Products {
 	private Integer rownumber;
 
 	private Integer isrecommended;
+
+	private Integer excluded;
 }
