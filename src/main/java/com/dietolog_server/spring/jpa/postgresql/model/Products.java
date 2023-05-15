@@ -26,5 +26,7 @@ public class Products {
 
 	private Integer isrecommended;
 
+	private Integer isnotrecommended;
+
 	private Integer excluded;
 }

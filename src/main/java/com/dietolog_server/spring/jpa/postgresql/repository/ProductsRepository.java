@@ -16,7 +16,7 @@ public interface ProductsRepository extends JpaRepository<Products, Long> {
   @Query(value = "select    \n"+ 
                  //хинт тормозит..
                  " p.name||', основные нутриенты:'||chr(13)||chr(13)||(select string_agg(name||' - '||cast(value as text)||' '||units||' на 100гр. ('||perc1on100gr||'% сут.нормы)',chr(13))  from (select * from(select n.name,i.value, i.perc1on100gr, n.units from info i left join nutrients n on n._id=i.nutrient where i.product=p._id order by to_number(coalesce(i.perc1on100gr,'0'),'999999D99') desc limit 20)ZZZ) ZZ) hint \n"+
-                 " , row_number() over(order by COALESCE(ii.value,0) desc,p._id) rownumber, p._id _id, name, lowercase, 0 val, 0 isrecommended, 0 excluded \n"+ 
+                 " , row_number() over(order by COALESCE(ii.value,0) desc,p._id) rownumber, p._id _id, name, lowercase, 0 val, 0 isrecommended, 0 isnotrecommended, 0 excluded \n"+ 
                  " from products p \n"+
                  " left join info ii on ii.nutrient=:sorting and ii.product =p._id \n" +
                  " where p.name like :filter \n"+

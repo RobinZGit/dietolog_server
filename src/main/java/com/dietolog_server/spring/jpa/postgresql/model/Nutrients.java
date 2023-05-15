@@ -23,6 +23,14 @@ public class Nutrients {
 
 	private Double n_dailyrate;
 
+	@Column(name = "min_dailyrate")
+	private Double min_dailyrate;
+
+	@Column(name = "max_dailyrate")
+	private Double max_dailyrate;
+
+	private Double koeff_to_miligr; //на сколько умножить val чтобы получить милигрвммы
+
 	private Double val;
 
 	private String hint;

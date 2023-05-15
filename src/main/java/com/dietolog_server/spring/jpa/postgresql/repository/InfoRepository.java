@@ -31,4 +31,5 @@ public interface InfoRepository  extends JpaRepository<Info, Long>{
   
   , nativeQuery = true)
   List<Info> findRecommendedProducts(@Param(value = "nutrientList") String nutrientList, @Param(value = "excludedProductstList") String excludedProductstList, @Param(value = "topCountRecommendedProducts") Integer topCountRecommendedProducts);
+
 }
