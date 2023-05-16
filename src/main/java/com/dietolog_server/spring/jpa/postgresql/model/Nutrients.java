@@ -21,8 +21,6 @@ public class Nutrients {
     @Column(name = "dailyrate")
 	private String dailyrate;
 
-	private Double n_dailyrate;
-
 	@Column(name = "min_dailyrate")
 	private Double min_dailyrate;
 
