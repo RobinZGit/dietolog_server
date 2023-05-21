@@ -33,6 +33,8 @@ public class Nutrients {
 
 	private String hint;
 
+	private Integer excluded;
+
     //TODO   если удалить этот геттер - падает при сортировке Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'java.lang.Integer'; nested exception is java.lang.NumberFormatException: For input string: "undefined"]
 	public long getId() {
 		return _id;
