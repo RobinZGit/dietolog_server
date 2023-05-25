@@ -113,6 +113,25 @@ public class ProductsController {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+
+	@GetMapping("/info_all")
+	public ResponseEntity<List<Info>> getInfo() {
+		try {
+			List<Info> info = new ArrayList<>();
+
+			infoRepository.findInfo().forEach(info::add);
+
+			
+			if (info.isEmpty()) {
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			}
+
+			return new ResponseEntity<>(info, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 
 	@GetMapping("/recommended_products")
 	public ResponseEntity<List<Info>> findRecommendedProducts(@RequestParam(required = false) String nutrientList, 
@@ -137,7 +156,7 @@ public class ProductsController {
 
 	//--------------------------------------------------------------------
 
-	@GetMapping("/tutorials/{id}")
+	@GetMapping("/product/{id}")
 	public ResponseEntity<Products> getProductById(@PathVariable("id") long id) {
 		Optional<Products> tutorialData = productsRepository.findById(id);
 

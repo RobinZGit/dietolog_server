@@ -20,6 +20,10 @@ public interface InfoRepository  extends JpaRepository<Info, Long>{
   " from info i  where position(','||i.product||',' in :productList) > 0", nativeQuery = true)
   List<Info> findInfoByProductList(@Param(value = "productList") String productList);
 
+  @Query(value = "select _id, product, nutrient, cast(value as text) value, cast(perc1on100gr as text) perc1on100gr  \n" +
+  " from info i  ", nativeQuery = true)
+  List<Info> findInfo();
+
 
   @Query(value = 
   "select _id, product, nutrient, value, perc1on100gr , rn from (  \n" +
